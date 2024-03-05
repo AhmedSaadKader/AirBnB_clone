@@ -1,25 +1,50 @@
 #!/usr/bin/env python3
 """This module contains the base model used for all other models
 """
-import json
 import uuid
-import datetime
+from datetime import datetime
 
 
 class BaseModel:
     """Base model for all other models
     """
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, **kwargs):
         self.id = kwargs.get('id', str(uuid.uuid4()))
-        if kwargs.get('created_at'):
-            self.created_at = datetime.datetime.strptime(kwargs['created_at'], '%Y-%m-%d %H:%M:%S')
-        else:
-            self.created_at = datetime.datetime.now()
-        if kwargs.get('updated_at'):
-            self.updated_at = datetime.datetime.strptime(kwargs['updated_at'], '%Y-%m-%d %H:%M:%S')
-        else:
-            self.updated_at = datetime.datetime.now()
+        self.created_at = kwargs.get('created_at')
+        self.updated_at = kwargs.get('updated_at')
+
+    @property
+    def created_at(self):
+        """property of created at attribute
+        """
+        return self.__created_at
+
+    @created_at.setter
+    def created_at(self, value):
+        if not value:
+            value = datetime.now()
+        elif isinstance(value, str):
+            value = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
+        elif not isinstance(value, datetime):
+            raise ValueError("created at must be a datetime object")
+        self.__created_at = value
+
+    @property
+    def updated_at(self):
+        """property of updated at attribute
+        """
+        return self.__updated_at
+
+    @updated_at.setter
+    def updated_at(self, value):
+        if not value:
+            value = datetime.now()
+        elif isinstance(value, str):
+            value = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
+        elif not isinstance(value, datetime):
+            raise ValueError("updated at must be a datetime object")
+        self.__updated_at = value
 
     def __str__(self):
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
@@ -27,12 +52,13 @@ class BaseModel:
     def save(self):
         """save instance to file
         """
-        self.updated_at = datetime.datetime.now()
+        self.updated_at = datetime.now()
 
     def to_dict(self):
         """returns a dictionary containing all keys/values"""
-        my_dict = self.__dict__
+        my_dict = self.__dict__.copy()
         my_dict['created_at'] = self.created_at.isoformat()
         my_dict['updated_at'] = self.updated_at.isoformat()
         my_dict['__class__'] = self.__class__.__name__
+        print(self.created_at)
         return my_dict
