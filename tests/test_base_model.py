@@ -66,16 +66,22 @@ class TestBaseModel(unittest.TestCase):
         self.assertIn('updated_at', my_dict)
         self.assertIn('__class__', my_dict)
         self.assertEqual(my_dict['id'], bm1.id)
-        self.assertEqual(my_dict['created_at'], bm1.created_at)
-        self.assertEqual(my_dict['updated_at'], bm1.updated_at)
+        self.assertEqual(my_dict['created_at'], bm1.created_at.isoformat())
+        self.assertEqual(my_dict['updated_at'], bm1.updated_at.isoformat())
         self.assertEqual(my_dict['__class__'], bm1.__class__.__name__)
-        self.assertEqual(my_dict, bm1.__dict__)
 
     def test_create_instance_from_dict(self):
         """test creating an instance from a dict
         """
         bm1 = BaseModel()
+        bm1.name = 'my base model'
+        bm1.number = 89
         my_dict = bm1.to_dict()
         bm2 = BaseModel(**my_dict)
         self.assertEqual(bm2.id, bm1.id)
         self.assertEqual(bm2.created_at, bm1.created_at)
+        self.assertEqual(bm2.updated_at, bm1.updated_at)
+        self.assertEqual(bm2.name, bm1.name)
+        self.assertEqual(bm2.number, bm1.number)
+        self.assertEqual(bm2.to_dict(), bm1.to_dict())
+        self.assertNotEqual(bm1, bm2)
