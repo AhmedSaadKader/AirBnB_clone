@@ -22,9 +22,3 @@ class BaseModel:
     def to_dict(self):
         """returns a dictionary containing all keys/values"""
         return (self.__dict__)
-
-    def to_json(self):
-        """convert to json
-        """
-        return json.dumps(self)
-
