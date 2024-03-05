@@ -14,6 +14,15 @@ class BaseModel:
         self.created_at = kwargs.get('created_at')
         self.updated_at = kwargs.get('updated_at')
 
+    def _parse_value(self, method, value):
+        if not value:
+            value = datetime.now()
+        elif isinstance(value, str):
+            value = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
+        elif not isinstance(value, datetime):
+            raise ValueError(f"{method} must be a datetime object")
+        return value
+
     @property
     def created_at(self):
         """property of created at attribute
@@ -22,13 +31,7 @@ class BaseModel:
 
     @created_at.setter
     def created_at(self, value):
-        if not value:
-            value = datetime.now()
-        elif isinstance(value, str):
-            value = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
-        elif not isinstance(value, datetime):
-            raise ValueError("created at must be a datetime object")
-        self.__created_at = value
+        self.__created_at = self._parse_value('created_at', value)
 
     @property
     def updated_at(self):
@@ -38,13 +41,7 @@ class BaseModel:
 
     @updated_at.setter
     def updated_at(self, value):
-        if not value:
-            value = datetime.now()
-        elif isinstance(value, str):
-            value = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
-        elif not isinstance(value, datetime):
-            raise ValueError("updated at must be a datetime object")
-        self.__updated_at = value
+        self.__updated_at = self._parse_value('updated_at', value)
 
     def __str__(self):
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
