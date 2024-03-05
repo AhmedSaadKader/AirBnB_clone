@@ -2,13 +2,16 @@
 """This module contains the base model used for all other models
 """
 import json
+import uuid
+
 
 class BaseModel:
     """Base model for all other models
     """
     filename = "/engine/file_storage.py"
-    def __init__(self, id, created_at, updated_at):
-        self.id = id
+
+    def __init__(self, created_at, updated_at):
+        self.id = uuid.uuid4()
         self.created_at = created_at
         self.updated_at = updated_at
 
