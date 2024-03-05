@@ -9,14 +9,13 @@ import datetime
 class BaseModel:
     """Base model for all other models
     """
-    filename = "/engine/file_storage.py"
 
     def __init__(self):
         self.id = str(uuid.uuid4())
         self.created_at = datetime.datetime.now()
         self.updated_at = datetime.datetime.now()
 
-    def save(self, filename=filename):
+    def save(self):
         """save instance to file
         """
         # my_instance = json.dumps(self)
@@ -32,7 +31,3 @@ class BaseModel:
         """
         return json.dumps(self)
 
-    def reload(self):
-        """read storage file, parse the JSON string and re-create
-        Student objects
-        """
