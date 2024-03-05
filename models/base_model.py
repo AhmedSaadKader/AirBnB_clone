@@ -18,9 +18,6 @@ class BaseModel:
     def save(self):
         """save instance to file
         """
-        # my_instance = json.dumps(self)
-        # with open(filename, "w", encoding="utf-8") as f:
-        #     f.write(my_instance)
 
     def to_dict(self):
         """returns a dictionary containing all keys/values"""
