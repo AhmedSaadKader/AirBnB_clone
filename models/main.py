@@ -5,4 +5,4 @@ from base_model import BaseModel
 if __name__ == "__main__":
 
     r1 = BaseModel()
-    print(r1.__dict__)
+    print(r1.to_dict())
