@@ -12,9 +12,6 @@ class HBNBCommand(cmd.Cmd):
 
     def do_EOF(self, arg):
         """exits the command
-
-        Returns:
-            True: End cmd
         """
         return True
 
