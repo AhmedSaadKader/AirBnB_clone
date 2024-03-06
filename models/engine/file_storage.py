@@ -3,6 +3,7 @@
 json
 """
 import json
+from pathlib import Path
 
 
 class FileStorage():
@@ -10,7 +11,7 @@ class FileStorage():
     instances
     """
     def __init__(self):
-        self.__file_path = 'file.json'
+        self.__file_path = Path('file.json')
         self.__objects = {}
 
     def all(self):
@@ -24,7 +25,7 @@ class FileStorage():
         Args:
             obj (BaseModel): BaseModel object
         """
-        self.__objects[f'{obj.__class__.__name__}.{obj.id}'] = obj
+        self.__objects[f'{obj.__class__.__name__}.{obj.id}'] = obj.to_dict()
 
     def save(self):
         """serializes __objects to the JSON file(path: __file_path)
@@ -36,5 +37,9 @@ class FileStorage():
         """read storage file, parse the JSON string and re-create
         Student objects
         """
-        with open(self.__file_path, encoding="utf-8") as f:
-            return json.loads(f.read())
+        if self.__file_path.exists():
+            try:
+                with open(self.__file_path, encoding="utf-8") as f:
+                    self.__objects = json.loads(f.read())
+            except json.JSONDecodeError:
+                return
