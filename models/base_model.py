@@ -22,8 +22,9 @@ class BaseModel:
         """Returns the dictionary representation of a Baseclass"""
         return {
             'id': self.id,
-            'created_at': self.created_at,
-            'updated_at': self.updated_at
+            'created_at': self.created_at.isoformat(),
+            'updated_at': self.updated_at.isoformat(),
+            '__class__ ': self.__class__
         }
 if __name__ == "__main__":
     base_model = BaseModel()
