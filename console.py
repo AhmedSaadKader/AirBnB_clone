@@ -2,6 +2,8 @@
 """Module for class HBNBCommand that contains the entry point of the command interpreter
 """
 import cmd
+from models.base_model import BaseModel
+from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
@@ -9,29 +11,60 @@ class HBNBCommand(cmd.Cmd):
     """
 
     prompt = "(hbnb)"
-    def do_create(self, arg):
+    def do_create(self, line):
         """create command
         """
-        print('create')
+        if not line:
+            print("** class name missing **")
+        elif line not in ['BaseModel']:
+            print("** class doesn't exist **")
+        else:
+            new_model = BaseModel()
+            new_model.save()
+            print(f'{new_model.id}')
 
     def help_create(self):
         """help for create command
         """
-        print('\n'.join([ 'create [person]',
-                           'Create a new BaseModel',
-                           ]))
+        print('\n'.join(['Usage: create [model]',
+                        'Create a new instance of [model], \
+saves it (to [file.json] and prints the [id])',
+                            'Ex: create BaseModel'
+                        ]))
 
-    def do_show(self, arg):
+    def do_show(self, line):
         """show command
         """
-        print('show')
+        args = line.split()
+        if len(args) < 2:
+            print("Usage: show <model> <id>")
+            return
+        model = args[0]
+        instance_id = args[1]
+        if not model:
+            print('** class name missing **')
+        elif not instance_id:
+            print('** instance id missing **')
+        elif model not in ['BaseModel']:
+            print("** class doesn't exist **")
+        else:
+            all_objects = storage.all()
+            for obj_id in all_objects.keys():
+                if instance_id in obj_id:
+                    obj = all_objects[obj_id]
+                    new_obj = BaseModel(**obj)
+                    print(new_obj)
+                    return
+            print('** no instance found **')
 
     def help_show(self):
         """help for show command
         """
-        print('\n'.join([ 'show [person]',
-                           'show a new BaseModel',
-                           ]))
+        print('\n'.join(['Usage: show <model> <id>',
+                        'Prints the string representation of an instance \
+based on the class nam and [id]',
+                        'Ex: show BaseModel 1234-1234-1234'
+                        ]))
 
     def do_destroy(self, arg):
         """destroy command
@@ -41,21 +74,29 @@ class HBNBCommand(cmd.Cmd):
     def help_destroy(self):
         """help for destroy command
         """
-        print('\n'.join([ 'destroy [person]',
-                           'destroy a new BaseModel',
-                           ]))
+        print('\n'.join(['Usage: destroy <model> <id>',
+                        'Deletes an instance based on the class name and id, \
+(save the change into the JSON file [file.json])',
+                        'Ex: destroy BaseModel 1234-1234-1234'
+                        ]))
 
     def do_all(self, arg):
         """all command
         """
-        print('all')
+        all_objects = storage.all()
+        for obj_id in all_objects.keys():
+            obj = all_objects[obj_id]
+            new_obj = BaseModel(**obj)
+            print(new_obj)
 
     def help_all(self):
         """help for all command
         """
-        print('\n'.join([ 'all [person]',
-                           'all a new BaseModel',
-                           ]))
+        print('\n'.join(['Usage: all <model>',
+                        'Prints all string representation of all instances \
+based or not on the class name',
+                        'Ex: $ all BaseModel or $ all',
+                        ]))
 
     def do_update(self, arg):
         """update command
@@ -65,9 +106,11 @@ class HBNBCommand(cmd.Cmd):
     def help_update(self):
         """help for update command
         """
-        print('\n'.join([ 'update [person]',
-                           'update a new BaseModel',
-                           ]))
+        print('\n'.join(['Usage: update <class name> <id> <attribute name> "<attribute value>"',
+                        'Updates an instance based on the class name and id by \
+adding or updating attribute (save the change into the JSON file).',
+                        'Ex: $ update BaseModel 1234-1234-1234 email "aibnb@mail.com"',
+                        ]))
 
     def do_EOF(self, arg):
         """exits the command
