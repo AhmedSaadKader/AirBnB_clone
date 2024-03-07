@@ -2,6 +2,7 @@
 """Module for class HBNBCommand that contains the entry point of the command interpreter
 """
 import cmd
+import re
 from models.base_model import BaseModel
 from models import storage
 
@@ -36,26 +37,26 @@ saves it (to [file.json] and prints the [id])',
         """show command
         """
         args = line.split()
-        if len(args) < 2:
-            print("Usage: show <model> <id>")
+        if len(args) == 0:
+            print('** class name missing **')
             return
         model = args[0]
-        instance_id = args[1]
-        if not model:
-            print('** class name missing **')
-        elif not instance_id:
-            print('** instance id missing **')
-        elif model not in ['BaseModel']:
+        if model not in ['BaseModel']:
             print("** class doesn't exist **")
-        else:
-            all_objects = storage.all()
-            for obj_id in all_objects.keys():
-                if instance_id in obj_id:
-                    obj = all_objects[obj_id]
-                    new_obj = BaseModel(**obj)
-                    print(new_obj)
-                    return
-            print('** no instance found **')
+            return
+        if len(args) == 1:
+            print('** instance id missing **')
+            return
+        instance_id = args[1]
+        all_objects = storage.all()
+        for obj_id in all_objects.keys():
+            pattern = f"\.{instance_id}$"
+            if re.search(pattern, obj_id):
+                obj = all_objects[obj_id]
+                new_obj = BaseModel(**obj)
+                print(new_obj)
+                return
+        print('** no instance found **')
 
     def help_show(self):
         """help for show command
