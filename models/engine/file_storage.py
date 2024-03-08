@@ -4,6 +4,9 @@ json
 """
 import json
 from pathlib import Path
+from models.base_model import BaseModel
+from models.user import User
+
 
 
 class FileStorage():
@@ -25,21 +28,27 @@ class FileStorage():
         Args:
             obj (BaseModel): BaseModel object
         """
-        self.__objects[f'{obj.__class__.__name__}.{obj.id}'] = obj.to_dict()
+        self.__objects[f'{obj.__class__.__name__}.{obj.id}'] = obj
 
     def save(self):
         """serializes __objects to the JSON file(path: __file_path)
         """
+        serialized_objects = {key: obj.to_dict() for key, obj in self.__objects.items()}
         with open(self.__file_path, "w", encoding="utf-8") as f:
-            f.write(json.dumps(self.__objects))
+            f.write(json.dumps(serialized_objects))
 
     def reload(self):
         """read storage file, parse the JSON string and re-create
-        Student objects
+        the objects
         """
         if self.__file_path.exists():
             try:
                 with open(self.__file_path, encoding="utf-8") as f:
-                    self.__objects = json.loads(f.read())
+                    serialized_objects = json.loads(f.read())
+                    self.__objects = {}
+                    for key, value in serialized_objects.items():
+                        class_name = value['__class__']
+                        obj = eval(f"{class_name}(**{value})")
+                        self.__objects[key] = obj
             except json.JSONDecodeError:
                 return

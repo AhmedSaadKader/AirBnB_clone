@@ -11,16 +11,18 @@ class HBNBCommand(cmd.Cmd):
     """contains the entry point of the command interpreter
     """
 
+    MODELS = ['BaseModel']
     prompt = "(hbnb)"
+
     def do_create(self, line):
         """create command
         """
         if not line:
             print("** class name missing **")
-        elif line not in ['BaseModel']:
+        elif line not in self.MODELS:
             print("** class doesn't exist **")
         else:
-            new_model = BaseModel()
+            new_model = eval(f"{line}()")
             new_model.save()
             print(f'{new_model.id}')
 
@@ -28,10 +30,22 @@ class HBNBCommand(cmd.Cmd):
         """help for create command
         """
         print('\n'.join(['Usage: create [model]',
-                        'Create a new instance of [model], \
+                        'Creates a new instance of [model], \
 saves it (to [file.json] and prints the [id])',
                             'Ex: create BaseModel'
                         ]))
+
+    def complete_create(self, text, line, begidx, endidx):
+        """auto complete for create
+        """
+        if not text:
+            completions = self.MODELS[:]
+        else:
+            completions = [ f
+                            for f in self.MODELS
+                            if f.startswith(text)
+                            ]
+        return completions
 
     def do_show(self, line):
         """show command
@@ -41,7 +55,7 @@ saves it (to [file.json] and prints the [id])',
             print('** class name missing **')
             return
         model = args[0]
-        if model not in ['BaseModel']:
+        if model not in self.MODELS:
             print("** class doesn't exist **")
             return
         if len(args) == 1:
@@ -67,10 +81,41 @@ based on the class nam and [id]',
                         'Ex: show BaseModel 1234-1234-1234'
                         ]))
 
-    def do_destroy(self, arg):
+    def complete_show(self, text, line, begidx, endidx):
+        """auto complete for create
+        """
+        if not text:
+            completions = self.MODELS[:]
+        else:
+            completions = [ f
+                            for f in self.MODELS
+                            if f.startswith(text)
+                            ]
+        return completions
+
+    def do_destroy(self, line):
         """destroy command
         """
-        print('destroy')
+        args = line.split()
+        if len(args) == 0:
+            print('** class name missing **')
+            return
+        model = args[0]
+        if model not in self.MODELS:
+            print("** class doesn't exist **")
+            return
+        if len(args) == 1:
+            print('** instance id missing **')
+            return
+        instance_id = args[1]
+        all_objects = storage.all()
+        for obj_id in all_objects.keys():
+            pattern = f"\.{instance_id}$"
+            if re.search(pattern, obj_id):
+                del all_objects[obj_id]
+                storage.save()
+                return
+        print('** no instance found **')
 
     def help_destroy(self):
         """help for destroy command
@@ -81,14 +126,38 @@ based on the class nam and [id]',
                         'Ex: destroy BaseModel 1234-1234-1234'
                         ]))
 
-    def do_all(self, arg):
+    def complete_destroy(self, text, line, begidx, endidx):
+        """auto complete for create
+        """
+        if not text:
+            completions = self.MODELS[:]
+        else:
+            completions = [ f
+                            for f in self.MODELS
+                            if f.startswith(text)
+                            ]
+        return completions
+
+    def do_all(self, line):
         """all command
         """
-        all_objects = storage.all()
-        for obj_id in all_objects.keys():
-            obj = all_objects[obj_id]
-            new_obj = BaseModel(**obj)
-            print(new_obj)
+        if not line:
+            all_objects = storage.all()
+            for obj_id in all_objects.keys():
+                obj = all_objects[obj_id]
+                new_obj = BaseModel(**obj)
+                print(new_obj)
+        else:
+            if line not in self.MODELS:
+                print("** class doesn't exist **")
+                return
+            all_objects = storage.all()
+            for obj_id in all_objects.keys():
+                pattern = f"^{line}\."
+                if re.search(pattern, obj_id):
+                    obj = all_objects[obj_id]
+                    new_obj = BaseModel(**obj)
+                    print(new_obj)
 
     def help_all(self):
         """help for all command
@@ -99,7 +168,19 @@ based or not on the class name',
                         'Ex: $ all BaseModel or $ all',
                         ]))
 
-    def do_update(self, arg):
+    def complete_all(self, text, line, begidx, endidx):
+        """auto complete for create
+        """
+        if not text:
+            completions = self.MODELS[:]
+        else:
+            completions = [ f
+                            for f in self.MODELS
+                            if f.startswith(text)
+                            ]
+        return completions
+
+    def do_update(self, line):
         """update command
         """
         print('update')
@@ -112,6 +193,18 @@ based or not on the class name',
 adding or updating attribute (save the change into the JSON file).',
                         'Ex: $ update BaseModel 1234-1234-1234 email "aibnb@mail.com"',
                         ]))
+
+    def complete_update(self, text, line, begidx, endidx):
+        """auto complete for create
+        """
+        if not text:
+            completions = self.MODELS[:]
+        else:
+            completions = [ f
+                            for f in self.MODELS
+                            if f.startswith(text)
+                            ]
+        return completions
 
     def do_EOF(self, arg):
         """exits the command
