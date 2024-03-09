@@ -14,7 +14,7 @@ class TestFileStorage(unittest.TestCase):
         """
         fs = FileStorage()
         self.assertIsInstance(fs, FileStorage)
-        self.assertEqual(str, type(FileStorage._FileStorage__file_path))
+        self.assertFalse(hasattr(fs, '__file_path'))
 
     def test_object(self):
         """test object attribute

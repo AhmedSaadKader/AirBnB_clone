@@ -16,9 +16,12 @@ class TestBaseModel(unittest.TestCase):
     def test_init(self):
         """test uuid
         """
-        inst = {'id': 1, 'created_at': 2}
-        bm1 = BaseModel(**inst)
+        bm1 = BaseModel()
+        bm_dict = bm1.to_dict()
+        bm2 = BaseModel(**bm_dict)
         self.assertIsInstance(bm1, BaseModel)
+        self.assertIsInstance(bm2, BaseModel)
+
 
     def test_uuid(self):
         """test uuid
