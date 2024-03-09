@@ -10,8 +10,6 @@ class Review(BaseModel):
     Args:
         BaseModel (BaseModel): super of class Review
     """
-    def __init__(self, place_id="", user_id="", text="", **kwargs):
-        self.place_id = place_id
-        self.user_id = user_id
-        self.text = text
-        super().__init__(**kwargs)
+    place_id = ""
+    user_id = ""
+    text = ""

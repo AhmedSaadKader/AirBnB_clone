@@ -10,7 +10,5 @@ class City(BaseModel):
     Args:
         BaseModel (BaseModel): super of class City
     """
-    def __init__(self, state_id="", name="", **kwargs):
-        self.state_id = state_id
-        self.name = name
-        super().__init__(**kwargs)
+    state_id = ""
+    name = ""
