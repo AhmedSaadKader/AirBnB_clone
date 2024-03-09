@@ -10,19 +10,38 @@ class TestFileStorage(unittest.TestCase):
     """ Test class for FileStorage class
     """
     def test_file_path(self):
-        pass
+        """test file path
+        """
+        fs = FileStorage()
+        self.assertIsInstance(fs, FileStorage)
+        self.assertTrue(hasattr(fs, "__file_path"))
 
     def test_object(self):
-        pass
+        """test object attribute
+        """
+        fs = FileStorage()
+        self.assertIsInstance(fs, FileStorage)
 
     def test_new(self):
-        pass
+        """test new method
+        """
+        fs = FileStorage()
+        self.assertIsInstance(fs, FileStorage)
 
     def test_all(self):
-        pass
+        """test all method
+        """
+        fs = FileStorage()
+        self.assertIsInstance(fs, FileStorage)
 
     def test_save(self):
-        pass
+        """test save method
+        """
+        fs = FileStorage()
+        self.assertIsInstance(fs, FileStorage)
 
     def reload(self):
-        pass
+        """test reload method
+        """
+        fs = FileStorage()
+        self.assertIsInstance(fs, FileStorage)
