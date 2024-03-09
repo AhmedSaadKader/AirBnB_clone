@@ -3,7 +3,7 @@
 """
 import uuid
 from datetime import datetime
-from models import storage
+import models
 
 class BaseModel:
     """Base model for all other models
@@ -18,7 +18,7 @@ class BaseModel:
                 if key != '__class__':
                     setattr(self, key, value)
         if not kwargs:
-            storage.new(self)
+            models.storage.new(self)
 
     def _parse_value(self, method, value):
         """parse the values of the kwargs dictionary of init
@@ -38,7 +38,7 @@ class BaseModel:
         """save instance to file
         """
         self.updated_at = datetime.now()
-        storage.save()
+        models.storage.save()
 
     def to_dict(self):
         """returns a dictionary containing all keys/values"""
