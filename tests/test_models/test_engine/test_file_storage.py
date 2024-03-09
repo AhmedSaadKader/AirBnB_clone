@@ -22,6 +22,7 @@ class TestFileStorage(unittest.TestCase):
         """
         fs = FileStorage()
         self.assertIsInstance(fs, FileStorage)
+        self.assertEqual(dict, type(FileStorage._FileStorage__objects))
 
     def test_new(self):
         """test new method
