@@ -11,6 +11,13 @@ from models.base_model import BaseModel
 class TestBaseModel(unittest.TestCase):
     """Class to test the BaseModel module
     """
+
+    def test_init(self):
+        """test uuid
+        """
+        bm1 = BaseModel()
+        self.assertIsInstance(bm1, BaseModel)
+
     def test_uuid(self):
         """test uuid
         """
