@@ -9,12 +9,13 @@ from models.base_model import BaseModel
 class TestFileStorage(unittest.TestCase):
     """ Test class for FileStorage class
     """
-#     def test_file_path(self):
-#         """test file path
-#         """
-#         fs = FileStorage()
-#         self.assertIsInstance(fs, FileStorage)
-# 
+    def test_file_path(self):
+        """test file path
+        """
+        fs = FileStorage()
+        self.assertIsInstance(fs, FileStorage)
+        self.assertTrue(hasattr(fs, "__file_path"))
+
     def test_object(self):
         """test object attribute
         """
