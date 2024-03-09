@@ -17,6 +17,7 @@ The **console - command interpreter -** that will be used to manage the objects 
 - Destroy an object
 
 ## Technologies
+[!terminal[https://github.com/AhmedSaadKader/AirBnB_clone/issues/1#issue-2177147875]]
 Project is created with:
 * Lorem version: 12.3
 * Ipsum version: 2.33
