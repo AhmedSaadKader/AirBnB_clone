@@ -11,10 +11,10 @@ class TestFileStorage(unittest.TestCase):
     """
     def test_file_path(self):
         pass
-    
+
     def test_object(self):
         pass
-    
+
     def test_new(self):
         pass
 
@@ -23,6 +23,6 @@ class TestFileStorage(unittest.TestCase):
 
     def test_save(self):
         pass
-    
+
     def reload(self):
         pass

@@ -10,10 +10,12 @@ class Place(BaseModel):
     Args:
         BaseModel (BaseModel): super of class Place
     """
-    def __init__(self, city_id="", user_id="", name="", description="",
-                number_rooms=0, number_bathrooms=0, max_guest=0,
-                price_by_night=0, latitude=0.0, longititude=0.0,
-                amenity_ids=[], **kwargs):
+    def __init__(
+            self, city_id="", user_id="", name="", description="",
+            number_rooms=0, number_bathrooms=0, max_guest=0,
+            price_by_night=0, latitude=0.0, longititude=0.0,
+            amenity_ids=[], **kwargs
+            ):
         self.city_id = city_id
         self.user_id = user_id
         self.name = name

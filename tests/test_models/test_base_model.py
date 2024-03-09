@@ -45,7 +45,9 @@ class TestBaseModel(unittest.TestCase):
         sys.stdout = sys.__stdout__
         output = captured_output.getvalue()
         captured_output.close()
-        self.assertEqual(output, f"[{bm1.__class__.__name__}] ({bm1.id}) {bm1.__dict__}\n")
+        self.assertEqual(
+            output, f"[{bm1.__class__.__name__}] ({bm1.id}) {bm1.__dict__}\n"
+            )
 
     def test_save_method(self):
         """test save method

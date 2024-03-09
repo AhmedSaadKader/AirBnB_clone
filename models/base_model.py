@@ -5,6 +5,7 @@ import uuid
 from datetime import datetime
 import models
 
+
 class BaseModel:
     """Base model for all other models
     """
@@ -13,8 +14,12 @@ class BaseModel:
         """init function for base_model
         """
         self.id = kwargs.get('id', str(uuid.uuid4()))
-        self.created_at = self._parse_value('created_at', kwargs.get('created_at'))
-        self.updated_at = self._parse_value('updated_at', kwargs.get('updated_at'))
+        self.created_at = self._parse_value(
+            'created_at', kwargs.get('created_at')
+            )
+        self.updated_at = self._parse_value(
+            'updated_at', kwargs.get('updated_at')
+            )
         for key, value in kwargs.items():
             if key not in ['id', 'created_at', 'updated_at']:
                 if key != '__class__':
