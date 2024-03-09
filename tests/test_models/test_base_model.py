@@ -6,6 +6,7 @@ import datetime
 import io
 import sys
 from models.base_model import BaseModel
+from models import storage
 
 
 class TestBaseModel(unittest.TestCase):
@@ -15,7 +16,8 @@ class TestBaseModel(unittest.TestCase):
     def test_init(self):
         """test uuid
         """
-        bm1 = BaseModel()
+        inst = {'id': 1, 'created_at': 2}
+        bm1 = BaseModel(**inst)
         self.assertIsInstance(bm1, BaseModel)
 
     def test_uuid(self):
