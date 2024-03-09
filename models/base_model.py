@@ -10,6 +10,8 @@ class BaseModel:
     """
 
     def __init__(self, **kwargs):
+        """init function for base_model
+        """
         self.id = kwargs.get('id', str(uuid.uuid4()))
         self.created_at = self._parse_value('created_at', kwargs.get('created_at'))
         self.updated_at = self._parse_value('updated_at', kwargs.get('updated_at'))
@@ -32,6 +34,8 @@ class BaseModel:
         return value
 
     def __str__(self):
+        """string representation of class
+        """
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
