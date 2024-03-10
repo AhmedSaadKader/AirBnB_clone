@@ -37,7 +37,9 @@ class TestFileStorage(unittest.TestCase):
     def test_save(self):
         """test save method
         """
-        self.assertIsInstance(storage, FileStorage)
+        bm = BaseModel()
+        storage.save()
+        self.assertIn(bm, storage.all().values())
 
     def reload(self):
         """test reload method
