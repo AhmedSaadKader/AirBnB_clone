@@ -13,91 +13,57 @@ class TestPlace(unittest.TestCase):
     """Class to test the Place module
     """
 
-    def test_init_kwargs(self):
-        """test uuid
+    def test_place_city_id(self):
+        """test Place city_id
         """
-        bm = Place(
-            id=str(uuid.uuid4),
-            created_at=datetime.today(),
-            updated_at=datetime.today()
-            )
-        self.assertIsInstance(bm, Place)
+        self.assertEqual(str, type(Place.city_id))
 
-
-    def test_uuid(self):
-        """test uuid
+    def test_place_user_id(self):
+        """test Place user_id
         """
-        bm1 = Place()
-        bm2 = Place()
-        self.assertIsInstance(bm1, Place)
-        self.assertTrue(hasattr(bm1, "id"))
-        self.assertNotEqual(bm1.id, bm2.id)
-        self.assertIsInstance(bm1.id, str)
+        self.assertEqual(str, type(Place.user_id))
 
-    def test_created_at(self):
-        """test created at
+    def test_place_name(self):
+        """test Place name
         """
-        bm1 = Place()
-        self.assertTrue(hasattr(bm1, "created_at"))
-        self.assertIsInstance(bm1.created_at, datetime)
+        self.assertEqual(str, type(Place.name))
 
-    def test_updated_at(self):
-        """test updated at
+    def test_place_description(self):
+        """test Place description
         """
-        bm1 = Place()
-        self.assertTrue(hasattr(bm1, "updated_at"))
-        self.assertIsInstance(bm1.updated_at, datetime)
+        self.assertEqual(str, type(Place.description))
 
-    def test_str_method(self):
-        """test string method
+    def test_place_number_rooms(self):
+        """test Place number_rooms
         """
-        bm1 = Place()
-        captured_output = io.StringIO()
-        sys.stdout = captured_output
-        print(bm1)
-        sys.stdout = sys.__stdout__
-        output = captured_output.getvalue()
-        captured_output.close()
-        self.assertEqual(
-            output, f"[{bm1.__class__.__name__}] ({bm1.id}) {bm1.__dict__}\n"
-            )
+        self.assertEqual(int, type(Place.number_rooms))
 
-    def test_save_method(self):
-        """test save method
+    def test_place_number_bathrooms(self):
+        """test Place number_bathrooms
         """
-        bm1 = Place()
-        old_updated = bm1.updated_at
-        self.assertEqual(bm1.updated_at, old_updated)
-        bm1.save()
-        self.assertNotEqual(bm1.updated_at, old_updated)
+        self.assertEqual(int, type(Place.number_bathrooms))
 
-    def test_to_dict_method(self):
-        """test to dict method
+    def test_place_max_guest(self):
+        """test Place max_guest
         """
-        bm1 = Place()
-        my_dict = bm1.to_dict()
-        self.assertIn('id', my_dict)
-        self.assertIn('created_at', my_dict)
-        self.assertIn('updated_at', my_dict)
-        self.assertIn('updated_at', my_dict)
-        self.assertIn('__class__', my_dict)
-        self.assertEqual(my_dict['id'], bm1.id)
-        self.assertEqual(my_dict['created_at'], bm1.created_at.isoformat())
-        self.assertEqual(my_dict['updated_at'], bm1.updated_at.isoformat())
-        self.assertEqual(my_dict['__class__'], bm1.__class__.__name__)
+        self.assertEqual(int, type(Place.max_guest))
 
-    def test_create_instance_from_dict(self):
-        """test creating an instance from a dict
+    def test_place_price_by_night(self):
+        """test Place price_by_night
         """
-        bm1 = Place()
-        bm1.name = 'my base model'
-        bm1.number = 89
-        my_dict = bm1.to_dict()
-        bm2 = Place(**my_dict)
-        self.assertEqual(bm2.id, bm1.id)
-        self.assertEqual(bm2.created_at, bm1.created_at)
-        self.assertEqual(bm2.updated_at, bm1.updated_at)
-        self.assertEqual(bm2.name, bm1.name)
-        self.assertEqual(bm2.number, bm1.number)
-        self.assertEqual(bm2.to_dict(), bm1.to_dict())
-        self.assertNotEqual(bm1, bm2)
+        self.assertEqual(int, type(Place.price_by_night))
+
+    def test_place_latitude(self):
+        """test Place latitude
+        """
+        self.assertEqual(float, type(Place.latitude))
+
+    def test_place_longitude(self):
+        """test Place longitude
+        """
+        self.assertEqual(float, type(Place.longitude))
+
+    def test_place_amenity_ids(self):
+        """test Place amenity_ids
+        """
+        self.assertEqual(list, type(Place.amenity_ids))
