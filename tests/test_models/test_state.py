@@ -9,7 +9,7 @@ import uuid
 from models.state import State
 
 
-class TestUser(unittest.TestCase):
+class TestState(unittest.TestCase):
     """Class to test the State module
     """
 

@@ -9,7 +9,7 @@ import uuid
 from models.review import Review
 
 
-class TestUser(unittest.TestCase):
+class TestReview(unittest.TestCase):
     """Class to test the Review module
     """
 

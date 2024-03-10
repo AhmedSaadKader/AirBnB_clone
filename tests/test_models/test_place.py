@@ -9,7 +9,7 @@ import uuid
 from models.place import Place
 
 
-class TestUser(unittest.TestCase):
+class TestPlace(unittest.TestCase):
     """Class to test the Place module
     """
 
