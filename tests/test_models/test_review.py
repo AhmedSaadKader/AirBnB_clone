@@ -2,10 +2,6 @@
 """ test module for review.py
 """
 import unittest
-from datetime import datetime
-import io
-import sys
-import uuid
 from models.review import Review
 
 

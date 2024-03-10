@@ -2,10 +2,6 @@
 """ test module for place.py
 """
 import unittest
-from datetime import datetime
-import io
-import sys
-import uuid
 from models.place import Place
 
 
