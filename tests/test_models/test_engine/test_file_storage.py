@@ -15,7 +15,9 @@ class TestFileStorage(unittest.TestCase):
         """test file path
         """
 
-        self.assertEqual(pathlib.PosixPath, type(FileStorage._FileStorage__file_path))
+        self.assertEqual(
+            pathlib.PosixPath, type(FileStorage._FileStorage__file_path)
+            )
 
     def test_object(self):
         """test object attribute

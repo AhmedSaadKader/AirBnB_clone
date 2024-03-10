@@ -19,8 +19,10 @@ class HBNBCommand(cmd.Cmd):
     """contains the entry point of the command interpreter
     """
 
-    MODELS = ['BaseModel', 'User', 'Amenity', 'City',
-              'Place', 'Review', 'State']
+    MODELS = [
+        'BaseModel', 'User', 'Amenity', 'City',
+        'Place', 'Review', 'State'
+        ]
     prompt = "(hbnb)"
     COMMANDS = {'all', 'show', 'count', 'destroy', 'update'}
 
@@ -41,6 +43,11 @@ class HBNBCommand(cmd.Cmd):
             if match:
                 if c == 'count':
                     print(self.class_count(model))
+                    return
+                if c == 'update':
+                    arguments_regex = r"['\"]([^'\"]*)['\"]"
+                    arg_match = re.findall(arguments_regex, command)
+                    self.onecmd(f"update {model} {' '.join(arg_match)}")
                     return
                 flag = 1
                 match = re.search(id_pattern, command)
@@ -77,11 +84,12 @@ class HBNBCommand(cmd.Cmd):
     def help_create(self):
         """help for create command
         """
-        print('\n'.join(['Usage: create [model]',
-                        'Creates a new instance of [model], \
+        print('\n'.join([
+            'Usage: create [model]',
+            'Creates a new instance of [model], \
 saves it (to [file.json] and prints the [id])',
-                         'Ex: create BaseModel'
-                         ]))
+            'Ex: create BaseModel'
+            ]))
 
     def complete_create(self, text, line, begidx, endidx):
         """auto complete for create
@@ -89,9 +97,10 @@ saves it (to [file.json] and prints the [id])',
         if not text:
             completions = self.MODELS[:]
         else:
-            completions = [f for f in self.MODELS
-                           if f.startswith(text)
-                           ]
+            completions = [
+                f for f in self.MODELS
+                if f.startswith(text)
+                ]
         return completions
 
     def get_obj(self, instance_id, model):
@@ -130,11 +139,12 @@ saves it (to [file.json] and prints the [id])',
     def help_show(self):
         """help for show command
         """
-        print('\n'.join(['Usage: show <model> <id>',
-                        'Prints the string representation of an instance \
+        print('\n'.join([
+            'Usage: show <model> <id>',
+            'Prints the string representation of an instance \
 based on the class nam and [id]',
-                         'Ex: show BaseModel 1234-1234-1234'
-                         ]))
+            'Ex: show BaseModel 1234-1234-1234'
+            ]))
 
     def complete_show(self, text, line, begidx, endidx):
         """auto complete for create
@@ -142,10 +152,10 @@ based on the class nam and [id]',
         if not text:
             completions = self.MODELS[:]
         else:
-            completions = [f
-                           for f in self.MODELS
-                           if f.startswith(text)
-                           ]
+            completions = [
+                f for f in self.MODELS
+                if f.startswith(text)
+                ]
         return completions
 
     def do_destroy(self, line):
@@ -175,11 +185,12 @@ based on the class nam and [id]',
     def help_destroy(self):
         """help for destroy command
         """
-        print('\n'.join(['Usage: destroy <model> <id>',
-                        'Deletes an instance based on the class name and id, \
+        print('\n'.join([
+            'Usage: destroy <model> <id>',
+            'Deletes an instance based on the class name and id, \
 (save the change into the JSON file [file.json])',
-                         'Ex: destroy BaseModel 1234-1234-1234'
-                         ]))
+            'Ex: destroy BaseModel 1234-1234-1234'
+            ]))
 
     def complete_destroy(self, text, line, begidx, endidx):
         """auto complete for create
@@ -187,10 +198,10 @@ based on the class nam and [id]',
         if not text:
             completions = self.MODELS[:]
         else:
-            completions = [f
-                           for f in self.MODELS
-                           if f.startswith(text)
-                           ]
+            completions = [
+                f for f in self.MODELS
+                if f.startswith(text)
+                ]
         return completions
 
     def do_all(self, line):
@@ -218,11 +229,12 @@ based on the class nam and [id]',
     def help_all(self):
         """help for all command
         """
-        print('\n'.join(['Usage: all <model>',
-                        'Prints all string representation of all instances \
+        print('\n'.join([
+            'Usage: all <model>',
+            'Prints all string representation of all instances \
 based or not on the class name',
-                         'Ex: $ all BaseModel or $ all',
-                         ]))
+            'Ex: $ all BaseModel or $ all',
+            ]))
 
     def complete_all(self, text, line, begidx, endidx):
         """auto complete for create
@@ -230,10 +242,10 @@ based or not on the class name',
         if not text:
             completions = self.MODELS[:]
         else:
-            completions = [f
-                           for f in self.MODELS
-                           if f.startswith(text)
-                           ]
+            completions = [
+                f for f in self.MODELS
+                if f.startswith(text)
+                ]
         return completions
 
     def do_update(self, line):
@@ -284,10 +296,10 @@ adding or updating attribute (save the change into the JSON file).',
         if not text:
             completions = self.MODELS[:]
         else:
-            completions = [f
-                           for f in self.MODELS
-                           if f.startswith(text)
-                           ]
+            completions = [
+                f for f in self.MODELS
+                if f.startswith(text)
+                ]
         return completions
 
     def do_EOF(self, arg):

@@ -9,7 +9,6 @@ class TestUser(unittest.TestCase):
     """Class to test the User module
     """
 
-
     def test_email(self):
         """test User email
         """

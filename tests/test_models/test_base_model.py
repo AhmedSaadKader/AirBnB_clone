@@ -24,7 +24,6 @@ class TestBaseModel(unittest.TestCase):
             )
         self.assertIsInstance(bm, BaseModel)
 
-
     def test_uuid(self):
         """test uuid
         """
