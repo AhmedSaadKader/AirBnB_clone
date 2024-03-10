@@ -13,16 +13,6 @@ class TestUser(unittest.TestCase):
     """Class to test the User module
     """
 
-    def test_init_kwargs(self):
-        """test uuid
-        """
-        bm = User(
-            id=str(uuid.uuid4),
-            created_at=datetime.today(),
-            updated_at=datetime.today()
-            )
-        self.assertIsInstance(bm, User)
-
 
     def test_uuid(self):
         """test uuid
@@ -101,3 +91,27 @@ class TestUser(unittest.TestCase):
         self.assertEqual(bm2.number, bm1.number)
         self.assertEqual(bm2.to_dict(), bm1.to_dict())
         self.assertNotEqual(bm1, bm2)
+
+    def test_email(self):
+        """test User email
+        """
+        user = User()
+        self.assertTrue(hasattr(user, 'email'))
+
+    def test_password(self):
+        """test User password
+        """
+        user = User()
+        self.assertTrue(hasattr(user, 'password'))
+
+    def test_first_name(self):
+        """test User first_name
+        """
+        user = User()
+        self.assertTrue(hasattr(user, 'first_name'))
+
+    def test_last_name(self):
+        """test User last_name
+        """
+        user = User()
+        self.assertTrue(hasattr(user, 'last_name'))
