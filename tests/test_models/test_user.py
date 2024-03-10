@@ -95,23 +95,19 @@ class TestUser(unittest.TestCase):
     def test_email(self):
         """test User email
         """
-        user = User()
-        self.assertTrue(hasattr(user, 'email'))
+        self.assertEqual(str, type(User.email))
 
     def test_password(self):
         """test User password
         """
-        user = User()
-        self.assertTrue(hasattr(user, 'password'))
+        self.assertEqual(str, type(User.password))
 
     def test_first_name(self):
         """test User first_name
         """
-        user = User()
-        self.assertTrue(hasattr(user, 'first_name'))
+        self.assertEqual(str, type(User.first_name))
 
     def test_last_name(self):
         """test User last_name
         """
-        user = User()
-        self.assertTrue(hasattr(user, 'last_name'))
+        self.assertEqual(str, type(User.last_name))
