@@ -2,6 +2,7 @@
 """ Test module for file_storage module
 """
 import unittest
+import pathlib
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
 
@@ -14,13 +15,14 @@ class TestFileStorage(unittest.TestCase):
         """
         fs = FileStorage()
         self.assertIsInstance(fs, FileStorage)
-        self.assertTrue(hasattr(fs, '__file_path'))
+        self.assertEqual(pathlib.PosixPath, type(FileStorage._FileStorage__file_path))
 
     def test_object(self):
         """test object attribute
         """
         fs = FileStorage()
         self.assertIsInstance(fs, FileStorage)
+        self.assertEqual(dict, type(FileStorage._FileStorage__objects))
 
     def test_new(self):
         """test new method
