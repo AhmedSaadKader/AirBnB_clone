@@ -1,35 +1,35 @@
 #!/usr/bin/python3
-""" test module for user.py
+""" test module for review.py
 """
 import unittest
 from datetime import datetime
 import io
 import sys
 import uuid
-from models.user import User
+from models.review import Review
 
 
 class TestUser(unittest.TestCase):
-    """Class to test the User module
+    """Class to test the Review module
     """
 
     def test_init_kwargs(self):
         """test uuid
         """
-        bm = User(
+        bm = Review(
             id=str(uuid.uuid4),
             created_at=datetime.today(),
             updated_at=datetime.today()
             )
-        self.assertIsInstance(bm, User)
+        self.assertIsInstance(bm, Review)
 
 
     def test_uuid(self):
         """test uuid
         """
-        bm1 = User()
-        bm2 = User()
-        self.assertIsInstance(bm1, User)
+        bm1 = Review()
+        bm2 = Review()
+        self.assertIsInstance(bm1, Review)
         self.assertTrue(hasattr(bm1, "id"))
         self.assertNotEqual(bm1.id, bm2.id)
         self.assertIsInstance(bm1.id, str)
@@ -37,21 +37,21 @@ class TestUser(unittest.TestCase):
     def test_created_at(self):
         """test created at
         """
-        bm1 = User()
+        bm1 = Review()
         self.assertTrue(hasattr(bm1, "created_at"))
         self.assertIsInstance(bm1.created_at, datetime)
 
     def test_updated_at(self):
         """test updated at
         """
-        bm1 = User()
+        bm1 = Review()
         self.assertTrue(hasattr(bm1, "updated_at"))
         self.assertIsInstance(bm1.updated_at, datetime)
 
     def test_str_method(self):
         """test string method
         """
-        bm1 = User()
+        bm1 = Review()
         captured_output = io.StringIO()
         sys.stdout = captured_output
         print(bm1)
@@ -65,7 +65,7 @@ class TestUser(unittest.TestCase):
     def test_save_method(self):
         """test save method
         """
-        bm1 = User()
+        bm1 = Review()
         old_updated = bm1.updated_at
         self.assertEqual(bm1.updated_at, old_updated)
         bm1.save()
@@ -74,7 +74,7 @@ class TestUser(unittest.TestCase):
     def test_to_dict_method(self):
         """test to dict method
         """
-        bm1 = User()
+        bm1 = Review()
         my_dict = bm1.to_dict()
         self.assertIn('id', my_dict)
         self.assertIn('created_at', my_dict)
@@ -89,11 +89,11 @@ class TestUser(unittest.TestCase):
     def test_create_instance_from_dict(self):
         """test creating an instance from a dict
         """
-        bm1 = User()
+        bm1 = Review()
         bm1.name = 'my base model'
         bm1.number = 89
         my_dict = bm1.to_dict()
-        bm2 = User(**my_dict)
+        bm2 = Review(**my_dict)
         self.assertEqual(bm2.id, bm1.id)
         self.assertEqual(bm2.created_at, bm1.created_at)
         self.assertEqual(bm2.updated_at, bm1.updated_at)
