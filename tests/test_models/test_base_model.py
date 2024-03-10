@@ -2,9 +2,10 @@
 """ test module for base_model.py
 """
 import unittest
-import datetime
+from datetime import datetime
 import io
 import sys
+import uuid
 from models.base_model import BaseModel
 from models import storage
 
@@ -13,14 +14,15 @@ class TestBaseModel(unittest.TestCase):
     """Class to test the BaseModel module
     """
 
-    def test_init(self):
+    def test_init_kwargs(self):
         """test uuid
         """
-        bm1 = BaseModel()
-        bm_dict = bm1.to_dict()
-        bm2 = BaseModel(**bm_dict)
-        self.assertIsInstance(bm1, BaseModel)
-        self.assertIsInstance(bm2, BaseModel)
+        bm = BaseModel(
+            id=str(uuid.uuid4),
+            created_at=datetime.today(),
+            updated_at=datetime.today()
+            )
+        self.assertIsInstance(bm, BaseModel)
 
 
     def test_uuid(self):
@@ -38,14 +40,14 @@ class TestBaseModel(unittest.TestCase):
         """
         bm1 = BaseModel()
         self.assertTrue(hasattr(bm1, "created_at"))
-        self.assertIsInstance(bm1.created_at, datetime.datetime)
+        self.assertIsInstance(bm1.created_at, datetime)
 
     def test_updated_at(self):
         """test updated at
         """
         bm1 = BaseModel()
         self.assertTrue(hasattr(bm1, "updated_at"))
-        self.assertIsInstance(bm1.updated_at, datetime.datetime)
+        self.assertIsInstance(bm1.updated_at, datetime)
 
     def test_str_method(self):
         """test string method
