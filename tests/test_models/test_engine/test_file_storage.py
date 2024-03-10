@@ -28,7 +28,9 @@ class TestFileStorage(unittest.TestCase):
         """test new method
         """
         fs = FileStorage()
-        self.assertIsInstance(fs, FileStorage)
+        bm1 = BaseModel()
+        all_objects = fs.all()
+        self.assertIn(bm1, all_objects.values())
 
     def test_all(self):
         """test all method
