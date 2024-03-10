@@ -270,8 +270,14 @@ based or not on the class name',
         if len(args) == 2:
             print('** attribute name missing **')
             return
+        print(len(args))
         attr_name = args[2]
         if len(args) == 3:
+            print(type(args[2]))
+            print(args[2])
+            print(args)
+            if isinstance(type(args[1]), dict):
+                print('hi')
             print('** value missing **')
             return
         value = args[3]
