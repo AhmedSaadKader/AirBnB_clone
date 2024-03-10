@@ -44,4 +44,6 @@ class TestFileStorage(unittest.TestCase):
     def reload(self):
         """test reload method
         """
-        self.assertIsInstance(storage, FileStorage)
+        bm = BaseModel()
+        storage.reload()
+        self.assertIn(bm, storage.all().values())
