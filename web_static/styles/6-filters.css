@@ -36,7 +36,6 @@
 .locations {
 	border-right: #DDDDDD solid 1px;
 	position: relative;
-	left: 0;
 }
 
 .amenities {
@@ -51,4 +50,33 @@
 .locations h4, .amenities h4 {
 	font-weight: 400;
 	font-size: 14px;
+}
+
+.popover {
+	display: none;
+	color: #FAFAFA;
+	width: 100%;
+	position: absolute;
+	top: 100%;
+	border: #DDDDDD 1px solid;
+	border-radius: 4px;
+	list-style: none;
+	padding: 10px 0;
+}
+
+.filters:hover .popover {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	gap: 20px;
+}
+
+.popover h2 {
+	margin: 3px 0px 0px 10px;
+	text-align: start;
+	font-size: 16px;
+}
+
+.popover li {
+	list-style: none;
 }
