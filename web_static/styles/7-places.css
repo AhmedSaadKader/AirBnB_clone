@@ -1,0 +1,18 @@
+.places {
+	width: 70%;
+}
+
+.places h1 {
+	text-align: start;
+	font-size: 30px;
+	padding: 10px;
+}
+
+.places article {
+	display: inline-block;
+	width: 35%;
+	padding: 20px;
+	margin: 20px;
+	border: #FF5A5F 1px solid;
+	border-radius: 4px;
+}

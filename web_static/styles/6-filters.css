@@ -1,7 +1,7 @@
 .filters {
 	color: white;
 	height: 70px;
-	width: 50%;
+	width: 70%;
 	border: 1px solid #DDDDDD;
 	border-radius: 4px;
 	display: flex;
@@ -40,7 +40,7 @@
 
 .amenities {
 	margin-right: auto;
-	margin-left: 10px;
+	position: relative;
 }
 
 .locations h3, .amenities h3 {
@@ -54,7 +54,7 @@
 
 .popover {
 	display: none;
-	color: #FAFAFA;
+	background-color: #FAFAFA;
 	width: 100%;
 	position: absolute;
 	top: 100%;
@@ -64,10 +64,11 @@
 	padding: 10px 0;
 }
 
-.filters:hover .popover {
+.amenities:hover .popover, .locations:hover .popover {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
+	align-items: flex-start;
 	gap: 20px;
 }
 
@@ -79,4 +80,8 @@
 
 .popover li {
 	list-style: none;
+}
+
+.popover ul li {
+	margin-left: 15px;
 }
