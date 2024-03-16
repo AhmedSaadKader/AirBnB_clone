@@ -83,3 +83,19 @@
 .places .article-amenities ul li img{
 	width: 25px;
 }
+
+@media screen and (max-width: 700px) {
+	.places article {
+		width: 90%
+	}
+}
+
+@media screen and (max-width: 400px) {
+	.price_by_night {
+		min-width: 50px;
+		font-size: 25px;
+		height: 50px;
+		top: 6px;
+		right: 6px;
+	}
+}
