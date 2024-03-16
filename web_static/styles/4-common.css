@@ -9,6 +9,7 @@
 .container {
 	max-width: 1000px;
 	margin: 30px auto;
+	margin-bottom: 50px;
 	text-align: center;
 	display: flex;
 	justify-content: center;
